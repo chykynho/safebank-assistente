@@ -1,0 +1,11 @@
+streamlit==1.36.0
+langchain==0.1.16
+langchain-community==0.0.20
+langchain-huggingface==0.0.2
+langchain-groq==0.0.1
+python-dotenv==1.0.1
+pyyaml==6.0
+ipython==8.18.1
+faiss-cpu==1.7.0
+sentence-transformers==2.2.0
+torch==2.2.0
