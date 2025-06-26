@@ -14,7 +14,8 @@ from langchain_core.prompts import MessagesPlaceholder
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.vectorstores import FAISS
+# from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from dotenv import load_dotenv
 from IPython.display import Markdown, display
 import os
@@ -31,7 +32,7 @@ id_model = "deepseek-r1-distill-llama-70b"
 temperature = 0.7
 
 # Caminho local onde estão os PDFs (ajuste conforme sua máquina)
-path = "/home/francisco-alves/Documentos/cursos/iaexpert/LLMs_Agentes_IA_Empresas_Negocios/documentos/atendimento_e_suporte"
+path = "/media/francisco-alves/dados/dev/venvs/aiagents-3.11/safebank-assistente/documentos"
 
 ### Função para carregar o modelo de linguagem grande (LLM)
 def load_llm(id_model, temperature):
@@ -50,8 +51,8 @@ llm = load_llm(id_model, temperature)
 
 ### Função para exibir respostas formatadas
 def show_res(res):
-    if "fromTo" in res:
-        res = res.split("fromTo")[-1].strip()
+    if "</think>" in res:
+        res = res.split("</think>")[-1].strip()
     else:
         res = res.strip()
     display(Markdown(res))
@@ -158,7 +159,7 @@ def chat_llm(rag_chain, input):
     response = rag_chain.invoke({"input": input, "chat_history": st.session_state.chat_history})
 
     res = response["answer"]
-    res = res.split("fromTo")[-1].strip() if "fromTo" in res else res.strip()
+    res = res.split("</think>")[-1].strip() if "</think>" in res else res.strip()
 
     st.session_state.chat_history.append(AIMessage(content=res))
 

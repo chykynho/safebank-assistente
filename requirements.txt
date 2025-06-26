@@ -1,11 +1,11 @@
 streamlit==1.36.0
 langchain==0.1.16
-langchain-community>=0.0.32  # Necessário para langchain 0.1.16
+langchain-community>=0.0.32
 langchain-huggingface==0.0.2
 langchain-groq==0.0.1
 python-dotenv==1.0.1
 pyyaml==6.0
 ipython==8.18.1
-#faiss-cpu==1.7.0
-sentence-transformers>=2.6.0  # Versão compatível com langchain-huggingface
+# faiss-cuda12; sys_platform == "linux" and platform_machine == "x86_64"  # Para Linux com GPU NVIDIA
+sentence-transformers>=2.6.0  # Corrigido o nome (sem o 'f' inicial)
 torch==2.2.0
